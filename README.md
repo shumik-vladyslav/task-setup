@@ -1,2 +1,2 @@
-# test-mark
+# test
 run in console "grunt"
