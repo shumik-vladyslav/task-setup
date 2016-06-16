@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+
+    <!-- Angular Material CSS now available via Google CDN; version 0.9.4 used here -->
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <link rel="stylesheet" href="./content/css/base.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="./app/app.module.js"></script>
+    <script type="text/javascript" src="./app/core/core.controller.js"></script>
+    <script type="text/javascript" src="./app/components/mark.directive.js"></script>
+</head>
+
+<body>
+    <md-toolbar layout="row" layout-align="left center" md-theme="{{navbar.theme()}}" class="navbar" flex>
+        <span flex="5"></span>
+        <span flex="5" class="logo" layout="row" layout-align="center center">
+                Navigation
+            </span>
+        <span flex="25"></span>
+        <section flex="35" hide-xs hide-sm layout="row" layout-align="space-around center" flex>
+            <md-button>Home</md-button>
+            <md-button>Blog</md-button>
+            <md-button>Contact</md-button>
+        </section>
+        <span flex="5" hide-md></span>
+    </md-toolbar>
+    <div id="wrapper" ng-controller="CoreController as core" layout="column" layout-align="center center">
+        <div class="label" layout="column" layout-align="start center">
+            <div flex='25'></div>
+            <h1>WISNE</h1>
+            <div flex='10'></div>
+            <span>World IS not Enough...</span>
+        </div>
+
+        <div>
+            <div id="carousel" class="carousel">
+                <button class="arrow prev">⇦</button>
+                <div class="gallery">
+                    <ul class="images">
+                        <li><img class="carousel-img" src="/content/img/A.png"></li>
+                        <li><img class="carousel-img" src="/content/img/B.png"></li>
+                        <li><img class="carousel-img" src="/content/img/C.png"></li>
+                        <li><img class="carousel-img" src="/content/img/B.png"></li>
+                        <li><img class="carousel-img" src="/content/img/A.png"></li>
+                        <li><img class="carousel-img" src="/content/img/A.png"></li>
+                        <li><img class="carousel-img" src="/content/img/A.png"></li>
+                    </ul>
+                </div>
+                <button class="arrow next">⇨</button>
+            </div>
+
+            <script>
+      function initcarousel(countShow, auto){
+        var count = 1; 
+        var countView = 0; 
+        var width;
+        switch (countShow) {
+            case 2:
+                width = 450; 
+            break
+            case 3:
+                width = 300; 
+            break
+            case 4:
+                width = 200; 
+            break
+            case 5:
+                width = 150;
+            break
+            defoult
+        }
+        var lis = document.getElementsByTagName('li');
+        for (var i = 0; i < lis.length; i++) {
+        lis[i].style.position = 'relative';
+        var span = document.createElement('span');
+        
+        span.style.cssText = 'position:absolute;left:0;top:0';
+        span.innerHTML = i + 1;
+        lis[i].appendChild(span);
+        }
+        var imgList = document.getElementsByClassName('carousel-img');
+         for (var i = 0; i < imgList.length; i++) {
+             
+             imgList[i].style.cssText = "width: "+ width +"px";
+             console.log()
+         }
+
+        width += 50;
+        
+
+        var carousel = document.getElementById('carousel');
+        var list = carousel.querySelector('ul');
+        var listElems = carousel.querySelectorAll('li');
+
+        var position = 0; 
+
+        carousel.querySelector('.prev').onclick = function() {
+
+        if(countView === 0){
+            countView = listElems.length - countShow;
+            position = -(countView) * width;
+            list.style.marginLeft = position + 'px'; 
+            return; 
+        }
+        countView--;
+        position = Math.min(position + width * count, 0)
+        list.style.marginLeft = position + 'px';
+        };
+
+        carousel.querySelector('.next').onclick = function() {
+
+        countView++;
+        if(listElems.length - countShow < countView){
+            countView = 0;
+            position = 0;
+            list.style.marginLeft = position + 'px';
+            return;
+        }
+        position = Math.max(position - width * count, -width * (listElems.length - count));
+        
+        list.style.marginLeft = position + 'px';
+        };
+
+        if(auto){
+            setInterval(function(){
+                carousel.querySelector('.next').click();
+            },1500);
+        }
+    }
+    
+    initcarousel(3, true);
+  </script>
+
+        </div>
+
+
+        <div layout="row" layout-align="start ">
+            <div flex='5'></div>
+
+            <div class="full-width" flex='55' layout="column" layout-align="start center">
+                <div flex='5'></div>
+
+                <div class="news-box" layout="column" layout-align="start center">
+                    <div flex='10'></div>
+                    <div class="full-width" layout="row" layout-align="start center">
+                        <h3 flex='15'>TITLE</h3>
+                        <div flex='65'></div>
+                        <h3 flex='20'>12 DEC</h3>
+                    </div>
+                    <div>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                        like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </div>
+                <div flex='10'></div>
+                <div class="news-box" layout="column" layout-align="start center">
+                    <div flex='10'></div>
+                    <div class="full-width" layout="row" layout-align="start center">
+                        <h3 flex='15'>TITLE</h3>
+                        <div flex='65'></div>
+                        <h3 flex='20'>12 DEC</h3>
+                    </div>
+                    <div>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+                        a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+                        Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                        like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing
+                        and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the
+                        1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                        essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+                        versions of Lorem Ipsum.
+                    </div>
+                </div>
+
+            </div>
+            <div flex='5'></div>
+            <div flex='25' layout="column" layout-align="start ">
+                <div flex='5'></div>
+                <div flex='95' class="search-box">
+                    <h2>SEARCH</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer flex='90' layout="row" layout-align="center center">
+        <div flex='5'></div>
+
+        <div flex='95' class="footer-menu" layout="row" layout-align="space-around start">
+            <div flex="80">
+            </div>
+            <div flex="20" layout="column" layout-xs="row" layout-sm="row" layout-align="center center">
+                <p>copyright 2012:</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
